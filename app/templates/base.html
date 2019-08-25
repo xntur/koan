@@ -1,5 +1,28 @@
-<div>
-    Koan:
-    <a href="/index">Home</a>
-    <a href="/login">Login</a>
-</div>
+
+<html>
+    <head>
+        {% if title %}
+        <title>{{ title }} - Koan</title>
+        {% else %}
+        <title>Koan</title>
+        {% endif %}
+    </head>
+    <body>
+      <div>
+        Koan:
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('login') }}">Login</a>
+      </div>
+        <hr>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </body>
+</html>
