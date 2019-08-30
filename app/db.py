@@ -21,7 +21,8 @@ def close_connection(exception):
 # Everything below just sets up the databases.        
 create_sql_questions_table = """
   CREATE TABLE IF NOT EXISTS questions (
-    name text PRIMARY KEY,
+    id text PRIMARY KEY,
+    name text NOT NULL,
     question text NOT NULL,
     answer text NOT NULL,
     count integer NOT NULL,
@@ -66,8 +67,8 @@ def add_questions():
     root = 'app/questions/'
     question_sql = '''
         INSERT OR REPLACE INTO 
-            questions(name,question,answer,count,points)
-            VALUES(?,?,?,?,?)'''
+            questions(id,name,question,answer,count,points)
+            VALUES(?,?,?,?,?,?)'''
     dependencies_sql = '''
         INSERT OR REPLACE INTO
             dependencies(solve_first, solve_next)
@@ -75,12 +76,13 @@ def add_questions():
     for filename in os.listdir(root):
         if filename.endswith('.questionfile'):
             fp = open(root + filename, 'r')
+            id = filename.split('.')[0]
             name = fp.readline()
             question = fp.readline()
             answer = fp.readline()
             points = fp.readline()
             deps = fp.readline().split(',')
-            c.execute(question_sql, (name, question, answer, 0, points))
+            c.execute(question_sql, (id, name, question, answer, 0, points))
             for dep in deps:
                 c.execute(dependencies_sql, (dep, name))
             fp.close()
