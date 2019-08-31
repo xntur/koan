@@ -5,6 +5,9 @@
         <title>{{ title }} - Koan</title>
     </head>
     <body>
-        <h1>Questions available for {{ team }}!</h1>
+        <h3>Questions available for <b>{{ team }}</b></h3>
+	{% for question in question_list %}
+	  {{ question.name }}
+	{% endfor %}
     </body>
 </html>

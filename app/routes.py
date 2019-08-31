@@ -1,9 +1,11 @@
 from app import app
 from app.forms import LoginForm
 from flask import render_template, flash, redirect, url_for, request, make_response
+import db
 
 def render_index(team):
-    return make_response(render_template('index.html', team=team))
+    questions = db.questions()
+    return make_response(render_template('index.html', team=team, question_list=questions))
     
 def render_login(message):
     return make_response(render_template('login.html', message=message))

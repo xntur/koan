@@ -2,6 +2,7 @@ from app import app
 from flask import g
 import sqlite3
 import os
+import json
 
 DATABASE = os.environ.get('KOAN_DB_PATH')
 
@@ -89,3 +90,33 @@ def add_questions():
     conn.commit()
 
 
+def questions():
+    conn = get_db()
+    c = conn.cursor()
+    c.execute('SELECT * FROM questions')
+    questions = c.fetchall()
+    out = []
+    for data in questions:
+        out.append({
+            'id': data[0],
+            'name': data[1],
+            'question': data[2],
+            'answer': data[3],
+            'count': data[4],
+            'points': data[5],
+        })
+    return out
+
+def dependencies():
+    conn = get_db()
+    c = conn.cursor()
+    c.execute('SELECT * FROM dependencies')
+    deps = c.fetchall()
+    questionToDeps = {}
+    for dep in deps:
+        if dep[1] not in questionToDeps:
+            questionToDeps[dep[1]] = []
+        questionToDeps[dep[1]] = dep[0]
+    return c.fetchall()
+
+    
