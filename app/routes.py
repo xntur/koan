@@ -1,19 +1,45 @@
 from app import app
 from app.forms import LoginForm
-from flask import render_template, flash, redirect, url_for
+from flask import render_template, flash, redirect, url_for, request, make_response
 
-@app.route('/')
-@app.route('/index')
+def render_index(team):
+    return make_response(render_template('index.html', team=team))
+    
+def render_login(message):
+    return make_response(render_template('login.html', message=message))
+
+def handle_login(request):
+    if request.method == 'POST':
+        team = request.form.get('team')
+        if team is not None:
+            response = render_index(team)
+            response.set_cookie('team', team)
+            return response
+    return None
+
+@app.route('/', methods=['GET', 'POST'])
+@app.route('/index', methods=['GET', 'POST'])
 def index():
-    user = {'username': 'Miguel'}
-    return render_template('index.html', title='Home', user=user)
+    index = handle_login(request)
+    if index is not None:
+        return index
+
+    team = request.cookies.get('team')
+    if team == '' or team is None:
+        return login()
+
+    return render_index(team)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    form = LoginForm()
-    if form.validate_on_submit():
-        flash('Login requested for user {}, remember_me={}'.format(
-            form.username.data, form.remember_me.data))
-        return redirect(url_for('index'))
-    return render_template('login.html', title='Sign In', form=form)
+    return render_login('Sign In')
 
+@app.route('/signout', methods=['GET', 'POST'])
+def sign_out():
+    index = handle_login(request)
+    if index is not None:
+        return index
+
+    response = render_login('Thanks for playing. Play again?')
+    response.set_cookie('team', '', expires=0)
+    return response
