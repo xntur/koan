@@ -89,6 +89,15 @@ def add_questions():
             fp.close()
     conn.commit()
 
+def question(data):
+    return {
+        'id': data[0],
+        'name': data[1],
+        'question': data[2],
+        'answer': data[3],
+        'count': data[4],
+        'points': data[5],
+    }
 
 def questions():
     conn = get_db()
@@ -97,15 +106,14 @@ def questions():
     questions = c.fetchall()
     out = []
     for data in questions:
-        out.append({
-            'id': data[0],
-            'name': data[1],
-            'question': data[2],
-            'answer': data[3],
-            'count': data[4],
-            'points': data[5],
-        })
+        out.append(question(data))
     return out
+
+def getquestion(questionid):
+    conn = get_db()
+    c = conn.cursor()
+    c.execute('SELECT * FROM questions WHERE id = ?', [questionid])
+    return question(c.fetchall()[0])
 
 def dependencies():
     conn = get_db()

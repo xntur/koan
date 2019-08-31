@@ -45,3 +45,9 @@ def sign_out():
     response = render_login('Thanks for playing. Play again?')
     response.set_cookie('team', '', expires=0)
     return response
+
+@app.route('/question', methods=['GET', 'POST'])
+def question():
+    questionid = request.args.get('question')
+    return render_template('question.html',
+                           question=db.getquestion(questionid))
