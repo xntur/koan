@@ -127,4 +127,34 @@ def dependencies():
         questionToDeps[dep[1]] = dep[0]
     return c.fetchall()
 
-    
+def getpoints(team):
+    conn = get_db()
+    c = conn.cursor()
+    c.execute('SELECT * FROM teams WHERE name = ?', [team])
+    teams = c.fetchall()
+    points = 0
+    print(teams)
+    if len(teams) == 1:
+        points = teams[0][1]
+    return points
+
+def correct(team, question):
+    conn = get_db()
+    c = conn.cursor()
+    c.execute('SELECT * FROM answered WHERE team = ? AND question = ?',
+              [team, question['id']])
+    answered = c.fetchall()
+    print(answered)
+    if len(answered) == 0:
+        print("here")
+        c.execute('SELECT * FROM teams WHERE name = ?', [team])
+        teams = c.fetchall()
+        points = 0
+        print(teams)
+        if len(teams) == 1:
+            points = teams[0]['points']
+        c.execute('INSERT INTO answered(team,question) VALUES(?,?)',
+                  [team, question['id']])
+        c.execute('INSERT INTO teams(name,points) VALUES(?,?)',
+                  [team, question['points'] + points])
+    conn.commit()

@@ -18,10 +18,9 @@ def threes(questions):
         out.append(out2)
     return out
 
-def render_index(team):
+def render_index(team, points):
     questions = db.questions()
-    print(questions)
-    return make_response(render_template('index.html', team=team, question_lists=threes(questions)))
+    return make_response(render_template('index.html', team=team, points=points, question_lists=threes(questions)))
     
 def render_login(message):
     return make_response(render_template('login.html', message=message))
@@ -46,7 +45,7 @@ def index():
     if team == '' or team is None:
         return login()
 
-    return render_index(team)
+    return render_index(team, db.getpoints(team))
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -64,13 +63,27 @@ def sign_out():
 
 @app.route('/question', methods=['GET', 'POST'])
 def question():
+    index = handle_login(request)
+    if index is not None:
+        return index
+    team = request.cookies.get('team')
     question = db.getquestion(request.args.get('question_id'))
     guess = ''
     if request.method == 'POST':
         guess = request.form.get('guess')
-    return render_template('question.html',
-                           question=questionpage(question, guess))
 
-def questionpage(question, guess):
+    print(team + "  " + guess)
+    return render_template('question.html',
+                           question=questionpage(question, guess, team))
+
+def questionpage(question, guess, team):
+    if (guess != ''):
+        question['guess'] = guess
+        print(guess)
+        print(question['answer'])
+        print("heh")
+        if (guess.rstrip() == question['answer'].rstrip()):
+            print('yay!')
+            db.correct(team, question)
     return question
                            

@@ -11,7 +11,7 @@
     </head>
     <body>
         <h3>Questions available for <b>{{ team }}</b></h3>
-
+	You currently have {{ points }} points. Answer questions to get more!
 	{% for question_list in question_lists %}
 	<div class="row">
 	  {% for question in question_list %}
@@ -20,7 +20,6 @@
 	      <div class="card blue darken-1">
 		<div class="card-content white-text">
 		  <h5> {{ question.name }} </h5>
-		  This has been solved {{ question.count }} time(s).<br>
 		</div>
 	      </div>
 	    </a>
