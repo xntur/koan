@@ -3,12 +3,22 @@ from app.forms import LoginForm
 from flask import render_template, flash, redirect, url_for, request, make_response
 from app import db
 
-def makequestions(questions, answered):
+def _solvable(idx, answered, dependencies):
+    if idx not in dependencies:
+        return True
+    for dep in dependencies[idx]:
+        if dep not in answered:
+            return False
+    return True
+
+def makequestions(questions, answered, dependencies):
     todo = []
     todo_temp = []
     done = []
     done_temp = []
     for i in questions:
+        if not _solvable(i['id'], answered, dependencies):
+            continue
         if i['id'] in answered:
             done_temp.append(i)
             if len(done_temp) == 3:
@@ -27,9 +37,10 @@ def makequestions(questions, answered):
 
 def render_index(team):
     questions = db.questions()
-    answered = db.getanswered(team)
+    answered = set(db.getanswered(team))
+    dependencies = db.dependencies()
     points = db.getpoints(team)
-    todo, done = makequestions(questions, answered)
+    todo, done = makequestions(questions, answered, dependencies)
     return make_response(
         render_template('index.html', team=team, points=points,
                         question_lists=todo,
@@ -83,8 +94,11 @@ def question():
 
     team = request.cookies.get('team')
     question = db.getquestion(request.args.get('question_id'))
+
     guess = ''
-    if request.method == 'POST':
+    if question['id'] in db.getanswered(team):
+        guess = question['answer']
+    elif request.method == 'POST':
         guess = request.form.get('guess')
 
     return render_template('question.html',
@@ -95,5 +109,11 @@ def questionpage(question, guess, team):
         question['guess'] = guess
         if (guess.rstrip() == question['answer'].rstrip()):
             db.correct(team, question)
+            question['judgment'] = 'correct'
+            question['judgmentColor'] = 'green'
+        else:
+            question['judgment'] = 'incorrect'
+            question['judgmentColor'] = 'red'
+
     return question
                            

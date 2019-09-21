@@ -85,7 +85,8 @@ def add_questions():
             deps = fp.readline().split(',')
             c.execute(question_sql, (id, name, question, answer, 0, points))
             for dep in deps:
-                c.execute(dependencies_sql, (dep, name))
+                if len(dep.rstrip()) != 0:
+                    c.execute(dependencies_sql, (dep, id))
             fp.close()
     conn.commit()
 
@@ -122,10 +123,13 @@ def dependencies():
     deps = c.fetchall()
     questionToDeps = {}
     for dep in deps:
+        print("---")
+        print(dep[0])
+        print(dep[1])
         if dep[1] not in questionToDeps:
             questionToDeps[dep[1]] = []
-        questionToDeps[dep[1]] = dep[0]
-    return c.fetchall()
+        questionToDeps[dep[1]].append(dep[0])
+    return questionToDeps
 
 def getpoints(team):
     conn = get_db()
@@ -141,7 +145,7 @@ def getanswered(team):
     conn = get_db()
     c = conn.cursor()
     c.execute('SELECT * FROM answered WHERE team = ?', [team])
-    return [i[1] for i in c.fetchall()]
+    return set([i[1] for i in c.fetchall()])
 
 def correct(team, question):
     conn = get_db()
