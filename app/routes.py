@@ -18,8 +18,9 @@ def threes(questions):
         out.append(out2)
     return out
 
-def render_index(team, points):
+def render_index(team):
     questions = db.questions()
+    points = db.getpoints(team)
     return make_response(render_template('index.html', team=team, points=points, question_lists=threes(questions)))
     
 def render_login(message):
@@ -45,7 +46,7 @@ def index():
     if team == '' or team is None:
         return login()
 
-    return render_index(team, db.getpoints(team))
+    return render_index(team)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -63,9 +64,10 @@ def sign_out():
 
 @app.route('/question', methods=['GET', 'POST'])
 def question():
-    index = handle_login(request)
-    if index is not None:
-        return index
+    team = request.cookies.get('team')
+    if team == '' or team is None:
+        return login()
+
     team = request.cookies.get('team')
     question = db.getquestion(request.args.get('question_id'))
     guess = ''

@@ -152,9 +152,9 @@ def correct(team, question):
         points = 0
         print(teams)
         if len(teams) == 1:
-            points = teams[0]['points']
-        c.execute('INSERT INTO answered(team,question) VALUES(?,?)',
+            points = teams[0][1]
+        c.execute('INSERT OR REPLACE INTO answered(team,question) VALUES(?,?)',
                   [team, question['id']])
-        c.execute('INSERT INTO teams(name,points) VALUES(?,?)',
+        c.execute('INSERT OR REPLACE INTO teams(name,points) VALUES(?,?)',
                   [team, question['points'] + points])
     conn.commit()
