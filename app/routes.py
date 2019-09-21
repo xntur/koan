@@ -107,7 +107,7 @@ def question():
 def questionpage(question, guess, team):
     if (guess != ''):
         question['guess'] = guess
-        if (guess.rstrip() == question['answer'].rstrip()):
+        if (guess.rstrip().lower() == question['answer'].rstrip().lower()):
             db.correct(team, question)
             question['judgment'] = 'correct'
             question['judgmentColor'] = 'green'
