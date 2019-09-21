@@ -27,5 +27,19 @@
 	  {% endfor %}
 	</div>
 	{% endfor %}
+	{% for question_list in done_question_lists %}
+	<div class="row">
+	  {% for question in question_list %}
+	  <div class="col s12 m4">
+	      <div class="card grey darken-1">
+		<div class="card-content white-text">
+		  <h5> {{ question.name }} </h5>
+		  You've already solved this!
+		</div>
+	      </div>
+	  </div>
+	  {% endfor %}
+	</div>
+	{% endfor %}
     </body>
 </html>

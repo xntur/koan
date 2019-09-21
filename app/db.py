@@ -133,10 +133,15 @@ def getpoints(team):
     c.execute('SELECT * FROM teams WHERE name = ?', [team])
     teams = c.fetchall()
     points = 0
-    print(teams)
     if len(teams) == 1:
         points = teams[0][1]
     return points
+
+def getanswered(team):
+    conn = get_db()
+    c = conn.cursor()
+    c.execute('SELECT * FROM answered WHERE team = ?', [team])
+    return [i[1] for i in c.fetchall()]
 
 def correct(team, question):
     conn = get_db()
@@ -144,13 +149,10 @@ def correct(team, question):
     c.execute('SELECT * FROM answered WHERE team = ? AND question = ?',
               [team, question['id']])
     answered = c.fetchall()
-    print(answered)
     if len(answered) == 0:
-        print("here")
         c.execute('SELECT * FROM teams WHERE name = ?', [team])
         teams = c.fetchall()
         points = 0
-        print(teams)
         if len(teams) == 1:
             points = teams[0][1]
         c.execute('INSERT OR REPLACE INTO answered(team,question) VALUES(?,?)',
