@@ -1,3 +1,8 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<title> Puzzles </title>
+
 {% include "base.html" %}
 
 <html>
@@ -6,9 +11,22 @@
     </head>
     <body>
         <h3>Questions available for <b>{{ team }}</b></h3>
-	{% for question in question_list %}
-	    {{ question.name }}
-	    <br>
+
+	{% for question_list in question_lists %}
+	<div class="row">
+	  {% for question in question_list %}
+	  <div class="col s12 m4">
+	    <a href = "{{ url_for('question', question_id=question.id) }}">
+	      <div class="card blue darken-1">
+		<div class="card-content white-text">
+		  <h5> {{ question.name }} </h5>
+		  This has been solved {{ question.count }} time(s).<br>
+		</div>
+	      </div>
+	    </a>
+	  </div>
+	  {% endfor %}
+	</div>
 	{% endfor %}
     </body>
 </html>
