@@ -17,9 +17,10 @@
 	  {% for question in question_list %}
 	  <div class="col s12 m4">
 	    <a href = "{{ url_for('question', question_id=question.id) }}">
-	      <div class="card blue darken-1">
+	      <div class="card cyan darken-1">
 		<div class="card-content white-text">
 		  <h5> {{ question.name }} </h5>
+		  This is worth {{ question.points }} point(s).
 		</div>
 	      </div>
 	    </a>

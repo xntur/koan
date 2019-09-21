@@ -123,9 +123,6 @@ def dependencies():
     deps = c.fetchall()
     questionToDeps = {}
     for dep in deps:
-        print("---")
-        print(dep[0])
-        print(dep[1])
         if dep[1] not in questionToDeps:
             questionToDeps[dep[1]] = []
         questionToDeps[dep[1]].append(dep[0])

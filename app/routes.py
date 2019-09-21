@@ -50,10 +50,8 @@ def render_login(message):
     return make_response(render_template('login.html', message=message))
 
 def handle_login(request):
-    print("here!!!")
     if request.method == 'POST':
         team = request.form.get('team')
-        print(team)
         if team is not None:
             response = render_index(team)
             response.set_cookie('team', team)
