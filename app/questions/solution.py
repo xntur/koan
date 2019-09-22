@@ -1,5 +1,7 @@
 import operator
 
+teststring = "nxmbbzmmailmmanrbjwfarvnzviikhhiabpsjtqrzbrqizirziddmtjwvkavofaggvjmflyhhhqsfirptznvxxbdmrbumrqfibvndimlubrjnzmfrrmngrbahjvrskfxxnnnrdvhvzkiffsxnrdrnirdffmambxehvfttzlbcdifiljrgmimsxhokzsxtlandrfsrmvvaphtwinnbjwifjdsjjgvxbkcyglkkjzflxwzdndjibzljfkwfwufktzjrjnttlupnjnzffavljanxkivcaautclnawcnxxrannslzrzfmzajakbxwvztvikmidgjjyrckisjnrqkivcdzsqxcxjmmjr"
+
 def notvowels(s):
     count = 0
     for c in s:
@@ -7,7 +9,7 @@ def notvowels(s):
             count += 1
     return count
 
-print("Not vowels: " + str(notvowels('nxmbbzmmailmmanrbjwfarvnzviikhhiabpsjtqrzbrqizirziddmtjwvkavofaggvjmflyhhhqsfirptznvxxbdmrbumrqfibvndimlubrjnzmfrrmngrbahjvrskfxxnnnrdvhvzkiffsxnrdrnirdffmambxehvfttzlbcdifiljrgmimsxhokzsxtlandrfsrmvvaphtwinnbjwifjdsjjgvxbkcyglkkjzflxwzdndjibzljfkwfwufktzjrjnttlupnjnzffavljanxkivcaautclnawcnxxrannslzrzfmzajakbxwvztvikmidgjjyrckisjnrqkivcdzsqxcxjmmjr')))
+print("Not vowels: " + str(notvowels(teststring)))
 
 def last10(n):
     return n % 10000000000
