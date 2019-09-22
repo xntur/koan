@@ -10,16 +10,16 @@
         <title>{{ title }} - Koan</title>
     </head>
     <body>
-        <h3>Questions available for <b>{{ team }}</b></h3>
-	You currently have {{ points }} points. Answer questions to get more!
-	{% for question_list in question_lists %}
+      <h3>Questions available for <b>{{ team }}</b></h3>
+      You currently have {{ points }} points. Answer questions to get more!
+      {% for question_list in question_lists %}
 	<div class="row">
 	  {% for question in question_list %}
 	  <div class="col s12 m4">
 	    <a href = "{{ url_for('question', question_id=question.id) }}">
-	      <div class="card cyan darken-1">
+	      <div class="card pink darken-1">
 		<div class="card-content white-text">
-		  <h5> {{ question.name }} </h5>
+		  <h5><b> {{ question.name }} </B></h5>
 		  This is worth {{ question.points }} point(s).
 		</div>
 	      </div>
@@ -32,12 +32,14 @@
 	<div class="row">
 	  {% for question in question_list %}
 	  <div class="col s12 m4">
-	      <div class="card grey darken-1">
+	    <a href = "{{ url_for('question', question_id=question.id) }}">
+	      <div class="card pink lighten-4">
 		<div class="card-content white-text">
 		  <h5> {{ question.name }} </h5>
 		  You've already solved this!
 		</div>
 	      </div>
+	    </a>
 	  </div>
 	  {% endfor %}
 	</div>
