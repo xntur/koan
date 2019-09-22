@@ -113,7 +113,7 @@ def digitFact(n):
     count = 0
     while x > 0:
         count += math.factorial(x % 10)
-        x = x / 10
+        x = int(x / 10)
     return n == count
 
 def countdigitfact():
