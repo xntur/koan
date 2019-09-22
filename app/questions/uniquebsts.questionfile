@@ -1,0 +1,5 @@
+Unique Binary Search Trees
+You can make two unique binary search trees using the numbers 1 -> 2 once; one with 1 as the root and 2 as the right child, and one with 2 as the root and 1 as the right child. How many can you make using numbers 1 -> 100 once?
+8745909320
+fibonacci
+10
