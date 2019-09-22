@@ -1,29 +1,29 @@
-{% include "base.html" %}
+{% extends "base.html" %}
 
-<head>
-  <title> {{ question.name }} </title>
-</head>
+{% block content %}
+<title> {{ question.name }} </title>
 <body>
-
-<div>
-<h2> {{ question.name }}</h2>
-<span>
-{{ question.question }}
-</span>
-<br><br>
-{% if question.guess %}
-<h5> Your guess <b>{{ question.guess }}</b> was
-  <b><font color={{question.judgmentColor}}>{{question.judgment}}!</font></b></h5>
-{% endif %}
-{% if question.judgment != 'correct' %}
-<form action="" method="post" novalidate>
-  <P> Your guess: <input type = "text" name = "guess" /></p>
-  <p><input type = "submit" value = "submit" /></p>
-</div>
-{% endif %}
-{% if question.judgment == 'correct' %}
-<h5><a href="{{ url_for('index') }}"> Try another one?</a><h5>
-{% endif %}
-<br>
-
+  <div>
+    <h2> {{ question.name }}</h2>
+    <span>
+      {{ question.question }}
+    </span>
+    <br><br>
+    {% if question.guess %}
+    <h5> Your guess <b>{{ question.guess }}</b> was
+      <b><font color={{question.judgmentColor}}>{{question.judgment}}!</font></b></h5>
+    {% endif %}
+    {% if question.judgment != 'correct' %}
+    <form action="" method="post" novalidate>
+      <p> Your guess: <input type = "text" name = "guess" /></p>
+      <p><input type = "submit" value = "submit" /></p>
+    </form>
+    {% endif %}
+  </div>
+  {% if question.judgment == 'correct' %}
+  <h5><a href="{{ url_for('index') }}"> Try another one?</a></h5>
+  {% endif %}
+  <br>
+      
 </body>
+{% endblock %}
