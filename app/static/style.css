@@ -25,3 +25,8 @@
     background-color: #ff5c8d;
     color: white;
 }
+
+a {
+    color: #d81b60;
+    text-decoration: underline;
+}
