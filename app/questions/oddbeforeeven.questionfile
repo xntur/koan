@@ -1,5 +1,5 @@
 Odd Before Even
-There are 4 ways to order the numbers 1-5 where the odd numbers come before the even ones [(1, 3, 2, 4), (3,1,2,4),(1,3,4,2),(3,1,4,2)]. How many ways are there to do the same for numbers 1-100? Only enter the first 10 digits.
+There are 4 ways to order the numbers 1-4 where the odd numbers come before the even ones [(1, 3, 2, 4), (3,1,2,4),(1,3,4,2),(3,1,4,2)]. How many ways are there to do the same for numbers 1-100? Only enter the first 10 digits.
 9250170652
 5
 easyfibonacci
