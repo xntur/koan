@@ -28,7 +28,7 @@
     {% for question in question_list %}
     <div class="col s12 m4">
       <a href = "{{ url_for('question', question_id=question.id) }}">
-	<div class="card pink lighten-4">
+	<div class="card pink lighten-3">
 	  <div class="card-content white-text">
 	    <h5> {{ question.name }} </h5>
 	    You've already solved this!
