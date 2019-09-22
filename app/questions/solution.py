@@ -50,7 +50,8 @@ def charsbycount(chars):
     out = [x[0] for x in sorted_x]
     return out 
 
-print("fibonacci: " + str(fib(70000)))
+print("fibonacci 17: " + str(fib(17)))
+print("fibonacci 70,000: " + str(fib(70000)))
 print("bsts: " + str(numTrees(100)))
 
 teststring = "nxmbbzmmailmmanrbjwfarvnzviikhhiabpsjtqrzbrqizirziddmtjwvkavofaggvjmflyhhhqsfirptznvxxbdmrbumrqfibvndimlubrjnzmfrrmngrbahjvrskfxxnnnrdvhvzkiffsxnrdrnirdffmambxehvfttzlbcdifiljrgmimsxhokzsxtlandrfsrmvvaphtwinnbjwifjdsjjgvxbkcyglkkjzflxwzdndjibzljfkwfwufktzjrjnttlupnjnzffavljanxkivcaautclnawcnxxrannslzrzfmzajakbxwvztvikmidgjjyrckisjnrqkivcdzsqxcxjmmjr"
