@@ -5,7 +5,11 @@
   <div>
     <h2> {{ question.name }}</h2>
     <span>
-      {{ question.question }}
+      <b> Points: </b> {{ question.points }} <br><br>
+	  <span style="width:1000px; word-wrap:break-word; display:inline-block;">
+	    {{ question.question }}
+	  </span>
+      
     </span>
     <br><br>
     {% if question.guess %}
