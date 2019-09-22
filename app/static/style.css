@@ -30,9 +30,19 @@ a {
 }
 
 input[type=text]:not(.browser-default) {
-  border: 1px solid #d81b60;
-  border-radius: 4px;
-  max-width: 800px;
-  min-width: 100px;
-  resize: vertical;
+    border: 1px solid #d81b60;
+    border-radius: 4px;
+    max-width: 800px;
+    min-width: 100px;
+    resize: vertical;
+}
+
+input[type=submit] {
+    background-color: #d81b60;
+    border: 5px;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
 }
