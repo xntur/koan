@@ -83,10 +83,15 @@ def add_questions():
             answer = fp.readline()
             points = fp.readline()
             deps = fp.readline().split(',')
-            c.execute(question_sql, (id, name, question, answer, 0, points))
+            c.execute(question_sql, (id.rstrip(),
+                                     name.rstrip(),
+                                     question.rstrip(),
+                                     answer.rstrip(),
+                                     0,
+                                     points))
             for dep in deps:
                 if len(dep.rstrip()) != 0:
-                    c.execute(dependencies_sql, (dep, id))
+                    c.execute(dependencies_sql, (dep.rstrip(), id.rstrip()))
             fp.close()
     conn.commit()
 
