@@ -10,7 +10,6 @@
     color: white;
     text-align: center;
     padding: 14px 16px;
-    text-decoration: none;
     font-size: 17px;
 }
 
@@ -28,5 +27,4 @@
 
 a {
     color: #d81b60;
-    text-decoration: underline;
 }
