@@ -1,5 +1,14 @@
 import operator
 
+def notvowels(s):
+    count = 0
+    for c in s:
+        if c not in ['a', 'e', 'i', 'o', 'u']:
+            count += 1
+    return count
+
+print("Not vowels: " + str(notvowels('nxmbbzmmailmmanrbjwfarvnzviikhhiabpsjtqrzbrqizirziddmtjwvkavofaggvjmflyhhhqsfirptznvxxbdmrbumrqfibvndimlubrjnzmfrrmngrbahjvrskfxxnnnrdvhvzkiffsxnrdrnirdffmambxehvfttzlbcdifiljrgmimsxhokzsxtlandrfsrmvvaphtwinnbjwifjdsjjgvxbkcyglkkjzflxwzdndjibzljfkwfwufktzjrjnttlupnjnzffavljanxkivcaautclnawcnxxrannslzrzfmzajakbxwvztvikmidgjjyrckisjnrqkivcdzsqxcxjmmjr')))
+
 def last10(n):
     return n % 10000000000
 
@@ -113,3 +122,4 @@ def countdigitfact():
     return count
 
 print("Digit facts: " + str(countdigitfact()))
+
