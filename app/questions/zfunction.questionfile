@@ -1,0 +1,5 @@
+Z Function
+We define the Z function as -, then +, of every prime number from 1 -> N. For instance, Z(10) -> 2 - 3 + 5 - 7 = -3. What is Z(10000)?
+4856
+3
+primes

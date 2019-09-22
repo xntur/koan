@@ -61,4 +61,55 @@ def weirdshift(inp, n):
     return inp
 
 print("Weird shift: " + weirdshift("atelnmyvtokdckw", 5))
-                             
+
+import math 
+def oddeven(n):
+    return math.factorial(n / 2) * math.factorial(n / 2)
+
+print("Odd/Even: " + str(oddeven(100))[:10])
+
+def primes(n):
+    primes = [2, 3, 5]
+    i = 7
+    while len(primes) < n:
+        isPrime = True
+        for p in primes:
+            if i % p == 0:
+                isPrime = False
+                break
+        if isPrime:
+            primes.append(i)
+        i += 2
+    return primes
+
+primes = primes(10001)
+print("10001 prime: " + str(primes[-1]))
+
+def zfunc(primes):
+    sign = 1
+    sum = 0
+    ind = 0
+    while primes[ind] < 10000:
+        sum += primes[ind] * sign
+        sign *= -1
+        ind += 1
+    return sum
+
+print("Z Function: " + str(zfunc(primes)))
+
+def digitFact(n):
+    x = n
+    count = 0
+    while x > 0:
+        count += math.factorial(x % 10)
+        x = x / 10
+    return n == count
+
+def countdigitfact():
+    count = 0
+    for i in range(10, 3628800):
+        if digitFact(i):
+            count += i
+    return count
+
+print("Digit facts: " + str(countdigitfact()))

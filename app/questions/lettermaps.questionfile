@@ -1,0 +1,5 @@
+Letter Maps
+If every letter from A to Z mapped to every letter after it (i.e. A maps to every letter B-Z, B maps to every letter C-Z, ..., Z doesn't map to any other letter), how many connections are there in the graph?
+325
+3
+oddbeforeeven
