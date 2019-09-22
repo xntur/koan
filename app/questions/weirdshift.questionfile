@@ -1,0 +1,5 @@
+Weird Shift
+A "weird shift" is when you take all the characters in a string, remove all 'a's, 'e', and 'o's, then shift the remaining letters 1 digit to the right. For instance, "ebzos" -> "bzs" -> "cat". What do you get after "weird shifting" "atelnmyvtokdckw" 5 times?
+yay
+3
+mostcommonchar

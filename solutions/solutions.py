@@ -46,3 +46,20 @@ teststring = "nxmbbzmmailmmanrbjwfarvnzviikhhiabpsjtqrzbrqizirziddmtjwvkavofaggv
 
 print("Most common: " + charsbycount(teststring)[-1])
 print("10 most common: " + ''.join(charsbycount(teststring)[-10:]))
+
+
+def weirdshift(inp, n):
+    strs = 'abcdefghijklmnopqrstuvwxyz'
+    def shift(inp):
+        chars = []
+        for char in inp:
+            if char not in ['a', 'e', 'o']:
+                chars.append(strs[(strs.index(char) + 1) % 26])
+        return ''.join(chars)
+    for i in range(0, n):
+        print(inp)
+        inp = shift(inp)
+    return inp
+
+print("Weird shift: " + weirdshift("atelnmyvtokdckw", 5))
+                             
