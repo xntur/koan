@@ -1,7 +1,9 @@
 from app import app
 from app.forms import LoginForm
-from flask import render_template, flash, redirect, url_for, request, make_response
+from flask import render_template, flash, redirect, url_for, request, make_response, Blueprint
 from app import db
+
+bp = Blueprint('koan', __name__, template_folder='templates')
 
 def _solvable(idx, answered, dependencies):
     if idx not in dependencies:
@@ -58,7 +60,8 @@ def handle_login(request):
             return response
     return None
 
-@app.route('/koan_index', methods=['GET', 'POST'])
+@bp.route('/koan_index', methods=['GET', 'POST'])
+@bp.route('/', methods=['GET', 'POST'])
 def index():
     index = handle_login(request)
     if index is not None:
@@ -70,24 +73,24 @@ def index():
 
     return render_index(team)
 
-@app.route('/koan_login', methods=['GET', 'POST'])
+@bp.route('/koan_login', methods=['GET', 'POST'])
 def login():
     index = handle_login(request)
     if index is not None:
         return index
     return render_login('Sign In')
 
-@app.route('/koan_signout', methods=['GET'])
+@bp.route('/koan_signout', methods=['GET'])
 def sign_out():
-    response = redirect(url_for('login'))
+    response = redirect(url_for('koan.login'))
     response.set_cookie('team', '', expires=0)
     return response
 
-@app.route('/koan_question', methods=['GET', 'POST'])
+@bp.route('/koan_question', methods=['GET', 'POST'])
 def question():
     team = request.cookies.get('team')
     if team == '' or team is None:
-        return redirect(url_for('login'))
+        return redirect(url_for('koan.login'))
 
     team = request.cookies.get('team')
     question = db.getquestion(request.args.get('question_id'))
@@ -114,3 +117,4 @@ def questionpage(question, guess, team):
 
     return question
                            
+app.register_blueprint(bp)

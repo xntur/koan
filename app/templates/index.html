@@ -11,7 +11,7 @@
   <div class="row">
     {% for question in question_list %}
     <div class="col s12 m4">
-      <a href = "{{ url_for('question', question_id=question.id) }}">
+      <a href = "{{ url_for('koan.question', question_id=question.id) }}">
 	<div class="card pink darken-1">
 	  <div class="card-content white-text">
 	    <h5><b> {{ question.name }} </B></h5>
@@ -27,7 +27,7 @@
   <div class="row">
     {% for question in question_list %}
     <div class="col s12 m4">
-      <a href = "{{ url_for('question', question_id=question.id) }}">
+      <a href = "{{ url_for('koan.question', question_id=question.id) }}">
 	<div class="card pink lighten-3">
 	  <div class="card-content white-text">
 	    <h5> {{ question.name }} </h5>

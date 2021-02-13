@@ -13,8 +13,8 @@
     </head>
     <body>
       <div class="topnav">
-        <a href="{{ url_for('index') }}">Home</a>
-        <a href="{{ url_for('sign_out') }}">Sign Out</a>
+        <a href="{{ url_for('koan.index') }}">Home</a>
+        <a href="{{ url_for('koan.sign_out') }}">Sign Out</a>
       </div>
         <hr>
         {% with messages = get_flashed_messages() %}
