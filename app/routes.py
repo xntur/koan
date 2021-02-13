@@ -117,4 +117,4 @@ def questionpage(question, guess, team):
 
     return question
                            
-app.register_blueprint(bp)
+app.register_blueprint(bp, url_prefix='/koan')
