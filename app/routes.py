@@ -3,7 +3,9 @@ from app.forms import LoginForm
 from flask import render_template, flash, redirect, url_for, request, make_response, Blueprint
 from app import db
 
-bp = Blueprint('koan', __name__, template_folder='templates')
+bp = Blueprint('koan', __name__,
+               template_folder='templates',
+               static_folder='static')
 
 def _solvable(idx, answered, dependencies):
     if idx not in dependencies:
