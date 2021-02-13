@@ -60,7 +60,7 @@ def handle_login(request):
             return response
     return None
 
-@bp.route('/koan_index', methods=['GET', 'POST'])
+@bp.route('/index', methods=['GET', 'POST'])
 @bp.route('/', methods=['GET', 'POST'])
 def index():
     index = handle_login(request)
@@ -73,20 +73,20 @@ def index():
 
     return render_index(team)
 
-@bp.route('/koan_login', methods=['GET', 'POST'])
+@bp.route('/login', methods=['GET', 'POST'])
 def login():
     index = handle_login(request)
     if index is not None:
         return index
     return render_login('Sign In')
 
-@bp.route('/koan_signout', methods=['GET'])
+@bp.route('/signout', methods=['GET'])
 def sign_out():
     response = redirect(url_for('koan.login'))
     response.set_cookie('team', '', expires=0)
     return response
 
-@bp.route('/koan_question', methods=['GET', 'POST'])
+@bp.route('/question', methods=['GET', 'POST'])
 def question():
     team = request.cookies.get('team')
     if team == '' or team is None:
